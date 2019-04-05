@@ -1,0 +1,22 @@
+.employee-details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  padding: 50px;
+}
+
+.employee-aligner {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.details-row {
+  flex: 1;
+}
+
+button, .details-row * {
+  margin: 5px;
+}

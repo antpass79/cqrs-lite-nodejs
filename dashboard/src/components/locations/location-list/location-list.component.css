@@ -1,0 +1,8 @@
+.location {
+    display: flex;
+}
+
+.location-table {
+    width: 100%;
+    height: 100%;
+}

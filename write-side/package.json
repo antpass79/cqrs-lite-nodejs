@@ -1,0 +1,50 @@
+{
+  "name": "write-side",
+  "version": "1.0.0",
+  "description": "",
+  "main": "entrypoint.js",
+  "scripts": {
+    "start": "npm run build:live",
+    "copyconfig": "copyfiles -f src/assets/*.json lib/assets",
+    "test": "mocha --require ts-node/register --watch-extensions ts tests/**/*.ts",
+    "build": "tsc -p . && npm run copyconfig",
+    "build:live": "nodemon --watch 'src/**/*.ts' --exec ts-node src/entrypoint.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/chai": "^4.1.7",
+    "@types/mocha": "^5.2.6",
+    "@types/node": "^11.10.5",
+    "chai": "^4.2.0",
+    "mocha": "^6.0.2",
+    "nodemon": "^1.18.10",
+    "ts-node": "^8.0.3",
+    "typescript": "^3.2.4"
+  },
+  "dependencies": {
+    "@types/axios": "^0.14.0",
+    "@types/body-parser": "^1.17.0",
+    "@types/cors": "^2.8.4",
+    "@types/express": "^4.16.1",
+    "@types/mongodb": "^3.1.21",
+    "@types/redis": "^2.8.12",
+    "@types/socket.io": "^2.1.2",
+    "@types/underscore": "^1.8.13",
+    "@types/uuid": "^3.4.4",
+    "automapper-ts": "^1.9.0",
+    "automapper-ts-node": "^1.0.2",
+    "body-parser": "^1.18.3",
+    "cors": "^2.8.5",
+    "express": "^4.16.4",
+    "fluent-ts-validator": "^3.0.2",
+    "graceful-fs": "^4.1.15",
+    "mongodb": "^3.1.13",
+    "nock": "^10.0.6",
+    "redis": "^2.8.0",
+    "rxjs": "^6.4.0",
+    "socket.io": "^2.2.0",
+    "uuid": "^3.3.2"
+  }
+}

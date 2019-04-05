@@ -1,0 +1,29 @@
+.board {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+}
+
+.board-row {
+  flex-direction: column;
+  flex: 1;
+}
+
+.row-up {
+  display: flex;
+  flex: 1;
+}
+
+.init {
+  align-self: flex-start;
+}
+
+.options {
+  display: flex;
+  flex-direction: column;
+}
+
+.link {
+  margin: 5px;
+}

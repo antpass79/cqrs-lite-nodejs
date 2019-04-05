@@ -1,0 +1,9 @@
+{
+    "LISTEN_PORT": 4000,
+    "ORIGINS_WHITE_LIST": [
+        "http://localhost:3000",
+        "http://localhost:2000"
+    ],
+    "CONNECTION_STRING": "mongodb://localhost/",
+    "DATABASE_NAME": "distributedfeeds"
+}
