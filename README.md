@@ -1,17 +1,22 @@
-# Distributed System
+# CQRS Lite nodejs
 
-This project wants to be an help for me to learn and improve some concepts related to distributed systems and the most useful patterns used in complex architectures.
+This project wants to be the porting on nodejs, of CQRSLite framework written in C# at the following link:
+
+    https://github.com/gautema/CQRSlite
+
+This work is a work in progress and definitely improvable.
+There are many framework ready to use, but I wanted to study in a deep way the CQRS and Event Sourcing patterns. I think that the most useful way to achieve this is study, to write code and to try personally and starting from a lite framework is a good approach in my opinion.
 
 ## System Explained
 
-The system is composed of 3 services:
+The system is composed of 5 projects:
 
-- dashboard: the front end application for inserting and showing data.
-- write-side: the service the handles the incoming requests (insert commands) from the front end.
-- read-side: the service the handles the outcoming queries (get commands) to the front end.
-
-The final goal is to have a system that can run on containers orchestrated by Kubernetes.
-Through the dashboard will be possible to manage data and stop some services in order to see what happens to the system and its consistency.
+- cqrs-lite: the core framework
+- cqrs-lite-common: the common layer, shared between write-side and read-side [NOT USED NOW]
+- common-utils: common libraries [NOT USED NOW]
+- dashboard: the front end application for inserting and showing data
+- write-side: the service the handles the incoming commands from the front end
+- read-side: the service the handles the outcoming queries to the front end
 
 ### Architecture
 
@@ -19,16 +24,37 @@ The following picture shows the flow of the data through main components
 
 ![architecture](assets/images/architecture.jpg)
 
-#### First Version Sequence Diagram
+## Run the System
 
-The following picture shows the sequence diagram for add command of the first version of the system, in which all components are supposed to be up without problem during the execution.
+In order to run the system you need to follow these steps:
 
-![v1sequencediagram](assets/images/first_version_sequence_diagram.jpg)
+- download or clone the repository
+- go under the folder write-side and type:
+
+        npm install
+        npm link ../cqrs-lite
+        npm start
+
+    In the package.json there are defined some tasks, also usable during debug in VS Code (see .VSCode folder).
+
+- go under the folder read-side and type:
+
+        npm install
+        npm link ../cqrs-lite
+        npm start
+
+    In the package.json there are defined some tasks, also usable during debug in VS Code (see .VSCode folder).
+
+- go under the folder dashboard and type:
+
+        npm install
+        npm start
 
 ## References
 
 ## DDD
 
+- https://github.com/gautema/CQRSlite
 - https://exceptionnotfound.net/real-world-cqrs-es-with-asp-net-and-redis-part-1-overview/
 
 ### Command, CommandHandler and CommandBus
