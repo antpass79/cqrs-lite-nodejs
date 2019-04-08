@@ -21,11 +21,11 @@ export class LocationCommandHandler implements
             this._session.add(location);
         }
         else if (command instanceof AssignEmployeeToLocationCommand) {
-            let location = this._session.get<Location>(command.id);
+            let location = this._session.get<Location>(Location, command.id);
             location.addEmployee(command.employeeID);
         }
         else if (command instanceof RemoveEmployeeFromLocationCommand) {
-            let location = this._session.get<Location>(command.id);
+            let location = this._session.get<Location>(Location, command.id);
             location.removeEmployee(command.employeeID);
         }
 

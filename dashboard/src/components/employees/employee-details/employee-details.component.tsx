@@ -119,14 +119,11 @@ export class EmployeeDetails extends React.Component<props, state> {
       locationID: this.state.selectedOption.value ? this.state.selectedOption.value : undefined
     };
 
-    this.employeeService.create(employee).then(response => {
-      return response.json()
-        .then(() => {
-          alert('Create successful');
-        })
-        .catch((error) => {
-          alert('Create failed');
-        })
+    this.employeeService.create(employee).then((response: Response) => {
+      if (response.ok)
+        alert('Create successful');
+      else
+        alert('Create failed');
     });
   }
 

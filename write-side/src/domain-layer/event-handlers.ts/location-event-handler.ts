@@ -28,29 +28,27 @@ export class LocationEventHandler implements
 
         if (message instanceof LocationCreatedEvent) {
             let location: LocationWM = this._mapper.map('LocationCreatedEvent', 'LocationWM', message);
-            this._locationRepo.save(location);
+            result = await this._locationRepo.save(location);
         }
         else if (message instanceof EmployeeAssignedToLocationEvent) {
             var location = await this._locationRepo.getByID(message.newLocationID);
             (await location).employees.push(message.employeeID);
-            this._locationRepo.save(location);
+            result = await this._locationRepo.save(location);
 
             //Find the employee which was assigned to this Location
             var employee = await this._employeeRepo.getByID(message.employeeID);
             employee.locationID = message.newLocationID;
-            this._employeeRepo.save(employee);
+            result = await this._employeeRepo.save(employee);
         }
         else if (message instanceof EmployeeRemovedFromLocationEvent) {
             var location = await this._locationRepo.getByID(message.oldLocationID);
             location.employees.splice(location.employees.indexOf(message.employeeID), 1);
-            this._locationRepo.save(location);
+            result = await this._locationRepo.save(location);
         }
         else
             result = false;
 
-        return new Promise<boolean>((resolve, reject) => {
-            resolve(result);
-        });
+        return Promise.resolve<boolean>(result);
     }
 
     // handle(message: LocationCreatedEvent): void {

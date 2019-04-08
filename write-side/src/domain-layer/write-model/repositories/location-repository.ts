@@ -9,8 +9,8 @@ export interface ILocationRepository extends IBaseRepository<LocationWM> {
     hasEmployee(locationID: number, employeeID: number): Promise<boolean>;
 }
 
-export class LocationRepository extends RedisRepository implements ILocationRepository 
-{
+export class LocationRepository extends RedisRepository implements ILocationRepository {
+    
     constructor() {
         super("location");
     }
@@ -40,9 +40,11 @@ export class LocationRepository extends RedisRepository implements ILocationRepo
     }
 
     async save(location: LocationWM): Promise<boolean> {
-        let result = await super.saveBase(location.locationID, location);
-        console.log(`LocationRepository.save -> saveBase of location.AggregateID ${location.aggregateID} is ${result}`);
-        return this.mergeIntoAllCollection(location);
+
+        let promises: Promise<any>[] = [super.saveBase(location.locationID, location), this.mergeIntoAllCollection(location)];
+        await Promise.all(promises);
+        console.log(`LocationRepository.save -> saveBase location AggregateID ${location.aggregateID}, ${location.city} ${location.streetAddress}`);
+        return Promise.resolve(true);
     }
 
     private async mergeIntoAllCollection(location: LocationWM): Promise<boolean> {

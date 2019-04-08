@@ -28,18 +28,21 @@ export class Locations extends React.Component<props, state> {
     }
 
     componentDidMount() {
-        let socketClientService = new SocketClientService('http://localhost:4005');
-        socketClientService.on('locationAdded', (location: Location) => {
-            console.log('Location from socket:');
-            console.log(location);
 
-            this.setState(state => {
-                const locations = [...state.locations, location];
-                return {
-                    locations
-                };
-            });
-        });
+        this.onRefresh();
+
+        // let socketClientService = new SocketClientService('http://localhost:4005');
+        // socketClientService.on('locationAdded', (location: Location) => {
+        //     console.log('Location from socket:');
+        //     console.log(location);
+
+        //     this.setState(state => {
+        //         const locations = [...state.locations, location];
+        //         return {
+        //             locations
+        //         };
+        //     });
+        // });
     }
 
     setBusy = (busy: boolean) => {

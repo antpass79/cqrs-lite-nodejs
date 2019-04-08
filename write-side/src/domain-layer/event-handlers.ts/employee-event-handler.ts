@@ -13,8 +13,10 @@ export class EmployeeEventHandler implements IEventHandler<EmployeeCreatedEvent>
         this._employeeRepository = employeeRepository;
     }
 
-    handle(message: EmployeeCreatedEvent): void {
+    async handle(message: EmployeeCreatedEvent): Promise<boolean> {
         let employee: EmployeeWM = this._mapper.map('EmployeeCreatedEvent', 'EmployeeWM', message);
-        this._employeeRepository.save(employee);
+        let result = await this._employeeRepository.save(employee);
+
+        return Promise.resolve<boolean>(result);
     }
 }

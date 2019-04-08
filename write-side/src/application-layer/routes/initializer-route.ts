@@ -7,7 +7,7 @@ export class InitializerRoute {
     private initializerController: InitializerController;
 
     constructor(communicationConfiguration: ICommunicationConfiguration) {
-        this.initializerController = new InitializerController(communicationConfiguration.bus, communicationConfiguration.autoMapper, communicationConfiguration.locationRepository);
+        this.initializerController = new InitializerController(communicationConfiguration.bus, communicationConfiguration.autoMapper, communicationConfiguration.employeeRepository, communicationConfiguration.locationRepository);
     }
 
     initRoute(): express.Router {

@@ -19,9 +19,17 @@
             ]
         },
         {
+            "label": "link",
+            "type": "shell",
+            "command": "npm run link",
+            "problemMatcher": [
+            ]
+        },
+        {
             "label": "predebug",
             "dependsOn": [
                 "build",
+                "link",
                 "copyconfig"                
             ]
         }

@@ -28,18 +28,21 @@ export class Employees extends React.Component<props, state> {
     }
 
     componentDidMount() {
-        let socketClientService = new SocketClientService('http://localhost:4005');
-        socketClientService.on('employeeAdded', (employee: Employee) => {
-            console.log('Employee from socket:');
-            console.log(employee);
 
-            this.setState(state => {
-                const employees = [...state.employees, employee];
-                return {
-                    employees
-                };
-            });
-        });
+        this.onRefresh();
+
+        // let socketClientService = new SocketClientService('http://localhost:4005');
+        // socketClientService.on('employeeAdded', (employee: Employee) => {
+        //     console.log('Employee from socket:');
+        //     console.log(employee);
+
+        //     this.setState(state => {
+        //         const employees = [...state.employees, employee];
+        //         return {
+        //             employees
+        //         };
+        //     });
+        // });
     }
 
     setBusy = (busy: boolean) => {
@@ -80,6 +83,12 @@ export class Employees extends React.Component<props, state> {
                 })
                 .catch((error) => {
                     console.log(error);
+                    this.setState(state => {
+                        const employees: Employee[] = [];
+                        return {
+                            employees
+                        };
+                    });
                 })
                 .finally(() => {
                     this.setBusy(false);
@@ -87,6 +96,12 @@ export class Employees extends React.Component<props, state> {
         })
             .catch((error) => {
                 console.log(error);
+                this.setState(state => {
+                    const employees: Employee[] = [];
+                    return {
+                        employees
+                    };
+                });
             })
             .finally(() => {
                 this.setBusy(false);

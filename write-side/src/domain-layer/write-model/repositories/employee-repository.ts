@@ -26,9 +26,11 @@ export class EmployeeRepository extends RedisRepository implements IEmployeeRepo
     }
 
     async save(employee: EmployeeWM): Promise<boolean> {
-        let result = await super.saveBase(employee.employeeID, employee);
-        console.log(`EmployeeRepository.save -> saveBase of employee.AggregateID ${employee.aggregateID} is ${result}`);
-        return this.mergeIntoAllCollection(employee);
+
+        let promises: Promise<any>[] = [super.saveBase(employee.employeeID, employee), this.mergeIntoAllCollection(employee)];
+        await Promise.all(promises);
+        console.log(`EmployeeRepository.save -> saveBase employee AggregateID ${employee.aggregateID}, ${employee.lastName}, ${employee.firstName}`);
+        return Promise.resolve(true);
     }
 
     private async mergeIntoAllCollection(employee: EmployeeWM): Promise<boolean> {
