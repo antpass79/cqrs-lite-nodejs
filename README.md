@@ -5,11 +5,11 @@ This project wants to be the porting on nodejs, of CQRSLite framework written in
     https://github.com/gautema/CQRSlite
 
 This work is a work in progress and definitely improvable.
-There are many framework ready to use, but I wanted to study in a deep way the CQRS and Event Sourcing patterns. I think that the most useful way to achieve this is study, to write code and to try personally and starting from a lite framework is a good approach in my opinion.
+There are many framework ready to use, but I wanted to study in a deep way the CQRS and Event Sourcing patterns. I think that the most useful way to achieve this is to study, to write code and to try personally. Starting from a lite framework is a good approach in my opinion.
 
 ## System Explained
 
-The system is composed of 5 projects:
+The system is composed of 6 projects:
 
 - cqrs-lite: the core framework
 - cqrs-lite-common: the common layer, shared between write-side and read-side
@@ -35,7 +35,7 @@ In order to run the system you need to follow these steps:
         npm run link [link is a task that run: npm link ../cqrs-lite && npm link ../cqrs-lite-common]
         npm start
 
-    In the package.json there are defined some tasks, also usable during debug in VS Code (see .VSCode folder).
+    In the package.json there are defined some tasks, also usable during debug in VS Code (see .VSCode folder). All things are ready, so if you run the debug all should work.
 
 - go under the folder read-side and type:
 
@@ -43,7 +43,7 @@ In order to run the system you need to follow these steps:
         npm run link [link is a task that run: npm link ../cqrs-lite && npm link ../cqrs-lite-common]
         npm start
 
-    In the package.json there are defined some tasks, also usable during debug in VS Code (see .VSCode folder).
+    In the package.json there are defined some tasks, also usable during debug in VS Code (see .VSCode folder). All things are ready, so if you run the debug all should work.
 
 - go under the folder dashboard and type:
 
