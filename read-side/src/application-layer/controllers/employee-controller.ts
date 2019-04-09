@@ -1,6 +1,4 @@
-import { ICommandSender } from "cqrs-lite";
-import { IEmployeeRepository } from "../../domain-layer/read-model/repositories/employee-repository";
-import { EmployeeRM } from "../../domain-layer/read-model/employee-rm";
+import { IEmployeeRepository, EmployeeM } from "cqrs-lite-common";
 
 export class EmployeeController {
 
@@ -11,7 +9,7 @@ export class EmployeeController {
 
         try {
             let id: any = req.body.employeeID;
-            let employee: EmployeeRM = await this.employeeRepository.getByID(id);
+            let employee: EmployeeM = await this.employeeRepository.getByID(id);
             if (employee)
                 res.send(employee);
             else
@@ -26,7 +24,7 @@ export class EmployeeController {
     async getAll(req: any, res: any) {
 
         try {
-            let employees: EmployeeRM[] = await this.employeeRepository.getAll();
+            let employees: EmployeeM[] = await this.employeeRepository.getAll();
             res.send(employees);
         }
         catch (error) {

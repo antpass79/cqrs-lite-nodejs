@@ -12,7 +12,7 @@ There are many framework ready to use, but I wanted to study in a deep way the C
 The system is composed of 5 projects:
 
 - cqrs-lite: the core framework
-- cqrs-lite-common: the common layer, shared between write-side and read-side [NOT USED NOW]
+- cqrs-lite-common: the common layer, shared between write-side and read-side
 - common-utils: common libraries [NOT USED NOW]
 - dashboard: the front end application for inserting and showing data
 - write-side: the service the handles the incoming commands from the front end
@@ -32,7 +32,7 @@ In order to run the system you need to follow these steps:
 - go under the folder write-side and type:
 
         npm install
-        npm link ../cqrs-lite
+        npm run link [link is a task that run: npm link ../cqrs-lite && npm link ../cqrs-lite-common]
         npm start
 
     In the package.json there are defined some tasks, also usable during debug in VS Code (see .VSCode folder).
@@ -40,7 +40,7 @@ In order to run the system you need to follow these steps:
 - go under the folder read-side and type:
 
         npm install
-        npm link ../cqrs-lite
+        npm run link [link is a task that run: npm link ../cqrs-lite && npm link ../cqrs-lite-common]
         npm start
 
     In the package.json there are defined some tasks, also usable during debug in VS Code (see .VSCode folder).

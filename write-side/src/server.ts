@@ -2,6 +2,8 @@ import express from 'express';
 import * as bodyParser from "body-parser";
 import cors from 'cors';
 
+import { LocationRepository, EmployeeRepository, LocationM, EmployeeM } from 'cqrs-lite-common';
+
 import {
     InProcessBus,
     Session,
@@ -27,8 +29,6 @@ import { AssignEmployeeToLocationCommand } from './domain-layer/commands/assign-
 import { RemoveEmployeeFromLocationCommand } from './domain-layer/commands/remove-employee-from-location-command';
 import { Guid } from './utilities/guid';
 import { ICommunicationConfiguration } from './application-layer/communication-configuration';
-import { EmployeeRepository } from './domain-layer/write-model/repositories/employee-repository';
-import { LocationRepository } from './domain-layer/write-model/repositories/location-repository';
 import { InitializerRoute } from './application-layer/routes/initializer-route';
 import { EmployeeEventHandler } from './domain-layer/event-handlers.ts/employee-event-handler';
 import { LocationEventHandler } from './domain-layer/event-handlers.ts/location-event-handler';
@@ -36,8 +36,6 @@ import { EmployeeCreatedEvent } from './domain-layer/events/employee-created-eve
 import { LocationCreatedEvent } from './domain-layer/events/location-created-event';
 import { EmployeeAssignedToLocationEvent } from './domain-layer/events/employee-assigned-to-location-event';
 import { EmployeeRemovedFromLocationEvent } from './domain-layer/events/employee-removed-from-location-event';
-import { LocationWM } from './domain-layer/write-model/location-wm';
-import { EmployeeWM } from './domain-layer/write-model/employee-wm';
 
 export class Server {
 
@@ -143,7 +141,7 @@ export class Server {
             convertUsing((resolutionContext: IResolutionContext) => {
 
                 let employeeCreatedEvent: EmployeeCreatedEvent = resolutionContext.sourceValue as EmployeeCreatedEvent;
-                let employeeRM: EmployeeWM = new EmployeeWM();
+                let employeeRM: EmployeeM = new EmployeeM();
                 employeeRM.aggregateID = employeeCreatedEvent.id;
                 employeeRM.dateOfBirth = employeeCreatedEvent.dateOfBirth;
                 employeeRM.employeeID = employeeCreatedEvent.employeeID;
@@ -158,7 +156,7 @@ export class Server {
             convertUsing((resolutionContext: IResolutionContext) => {
 
                 let locationCreatedEvent: LocationCreatedEvent = resolutionContext.sourceValue as LocationCreatedEvent;
-                let locationRM: LocationWM = new LocationWM();
+                let locationRM: LocationM = new LocationM();
                 locationRM.aggregateID = locationCreatedEvent.id;
                 locationRM.city = locationCreatedEvent.city;
                 locationRM.locationID = locationCreatedEvent.locationID;

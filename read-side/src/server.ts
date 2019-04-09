@@ -10,8 +10,7 @@ import { AutoMapper } from 'automapper-ts-node';
 import { EmployeeRoute } from './application-layer/routes/employee-route';
 import { LocationRoute } from './application-layer/routes/location-route';
 import { NodeConfig } from './utilities/node-config';
-import { EmployeeRepository } from './domain-layer/read-model/repositories/employee-repository';
-import { LocationRepository } from './domain-layer/read-model/repositories/location-repository';
+import { LocationRepository, EmployeeRepository } from 'cqrs-lite-common';
 import { ICommunicationConfiguration } from './application-layer/communication-configuration';
 
 export class Server {

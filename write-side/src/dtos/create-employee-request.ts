@@ -1,6 +1,5 @@
 import { IValidator } from "./validator";
-import { IEmployeeRepository } from "../domain-layer/write-model/repositories/employee-repository";
-import { ILocationRepository } from "../domain-layer/write-model/repositories/location-repository";
+import { ILocationRepository, IEmployeeRepository } from "cqrs-lite-common";
 
 export class CreateEmployeeRequest {
     employeeID: any;

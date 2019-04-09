@@ -1,5 +1,5 @@
 {
-  "name": "cqrs-lite",
+  "name": "cqrs-lite-common",
   "private": true,
   "version": "1.0.0",
   "description": "",
@@ -17,9 +17,11 @@
   },
   "dependencies": {
     "@types/memory-cache": "^0.2.0",
+    "@types/redis": "^2.8.12",
     "@types/uuid": "^3.4.4",
     "automapper-ts": "^1.9.0",
     "memory-cache": "^0.2.0",
+    "redis": "^2.8.0",
     "uuid": "^3.3.2"
   }
 }

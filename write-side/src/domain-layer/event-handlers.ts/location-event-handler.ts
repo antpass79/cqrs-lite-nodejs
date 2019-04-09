@@ -2,9 +2,7 @@ import { IEventHandler } from "cqrs-lite";
 import { LocationCreatedEvent } from "../events/location-created-event";
 import { EmployeeAssignedToLocationEvent } from "../events/employee-assigned-to-location-event";
 import { EmployeeRemovedFromLocationEvent } from "../events/employee-removed-from-location-event";
-import { LocationWM } from "../write-model/location-wm";
-import { ILocationRepository } from "../write-model/repositories/location-repository";
-import { IEmployeeRepository } from "../write-model/repositories/employee-repository";
+import { ILocationRepository, IEmployeeRepository, LocationM } from "cqrs-lite-common";
 import { AutoMapper } from "automapper-ts-node";
 
 export class LocationEventHandler implements
@@ -27,7 +25,7 @@ export class LocationEventHandler implements
         let result = true;
 
         if (message instanceof LocationCreatedEvent) {
-            let location: LocationWM = this._mapper.map('LocationCreatedEvent', 'LocationWM', message);
+            let location: LocationM = this._mapper.map('LocationCreatedEvent', 'LocationWM', message);
             result = await this._locationRepo.save(location);
         }
         else if (message instanceof EmployeeAssignedToLocationEvent) {
@@ -50,26 +48,4 @@ export class LocationEventHandler implements
 
         return Promise.resolve<boolean>(result);
     }
-
-    // handle(message: LocationCreatedEvent): void {
-    //     let location: LocationRM = this._mapper.Map<LocationRM>(message);
-    //     this._locationRepo.save(location);
-    // }
-
-    // handle(message: EmployeeAssignedToLocationEvent): void {
-    //     var location = this._locationRepo.getByID(message.newLocationID);
-    //     location.employees.push(message.employeeID);
-    //     this._locationRepo.save(location);
-
-    //     //Find the employee which was assigned to this Location
-    //     var employee = this._employeeRepo.getByID(message.employeeID);
-    //     employee.locationID = message.newLocationID;
-    //     this._employeeRepo.save(employee);
-    // }
-
-    // handle(message: EmployeeRemovedFromLocationEvent): void {
-    //     var location = this._locationRepo.getByID(message.oldLocationID);
-    //     location.employees.splice(location.employees.indexOf(message.employeeID), 1);
-    //     this._locationRepo.save(location);
-    // }
 }

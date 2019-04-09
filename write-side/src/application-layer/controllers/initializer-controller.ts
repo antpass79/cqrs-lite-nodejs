@@ -1,13 +1,10 @@
 import { ICommandSender } from "cqrs-lite";
-import { CreateEmployeeCommand } from "../../domain-layer/commands/create-employee-command";
-import { AssignEmployeeToLocationCommand } from "../../domain-layer/commands/assign-employee-to-location-command";
+import { ILocationRepository, IEmployeeRepository } from "cqrs-lite-common";
 import { CreateEmployeeRequest, CreateEmployeeRequestValidator } from "../../dtos/create-employee-request";
-import { ILocationRepository } from "../../domain-layer/write-model/repositories/location-repository";
 import { AutoMapper } from "automapper-ts-node";
 import { EmployeeService } from "../services/employee.service";
 import { CreateLocationRequest, CreateLocationRequestValidator } from "../../dtos/create-location-request";
 import { LocationService } from "../services/location.service";
-import { IEmployeeRepository } from "../../domain-layer/write-model/repositories/employee-repository";
 
 export class InitializerController {
 

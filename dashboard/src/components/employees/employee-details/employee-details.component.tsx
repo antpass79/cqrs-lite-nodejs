@@ -155,7 +155,7 @@ export class EmployeeDetails extends React.Component<props, state> {
             </div>
           <div className="details-row">
             <label>Location</label>
-            <Select value={selectedOption} options={this.state.options} onChange={this.onLocationChange}></Select>
+            <Select className="select" value={selectedOption} options={this.state.options} onChange={this.onLocationChange}></Select>
           </div>
           <button onClick={this.onSave}>Save</button>
           <button onClick={this.onBack}>Back</button>

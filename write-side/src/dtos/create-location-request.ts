@@ -1,4 +1,4 @@
-import { ILocationRepository } from "../domain-layer/write-model/repositories/location-repository";
+import { ILocationRepository } from "cqrs-lite-common";
 import { IValidator } from "./validator";
 
 export class CreateLocationRequest {

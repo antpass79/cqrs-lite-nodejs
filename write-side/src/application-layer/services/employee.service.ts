@@ -1,6 +1,6 @@
 import { CreateEmployeeRequest } from "../../dtos/create-employee-request";
 import { CreateEmployeeCommand } from "../../domain-layer/commands/create-employee-command";
-import { ILocationRepository } from "../../domain-layer/write-model/repositories/location-repository";
+import { ILocationRepository } from "cqrs-lite-common";
 import { AutoMapper } from "automapper-ts-node";
 import { ICommandSender } from "cqrs-lite";
 import { AssignEmployeeToLocationCommand } from "../../domain-layer/commands/assign-employee-to-location-command";

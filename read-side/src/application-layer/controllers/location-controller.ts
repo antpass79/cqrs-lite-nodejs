@@ -1,6 +1,4 @@
-import { ILocationRepository } from "../../domain-layer/read-model/repositories/location-repository";
-import { LocationRM } from "../../domain-layer/read-model/location-rm";
-import { EmployeeRM } from "../../domain-layer/read-model/employee-rm";
+import { ILocationRepository, LocationM, EmployeeM } from "cqrs-lite-common";
 
 export class LocationController {
 
@@ -11,7 +9,7 @@ export class LocationController {
 
         try {
             let id: any = req.body.locationID;
-            let location: LocationRM = await this.locationRepository.getByID(id);
+            let location: LocationM = await this.locationRepository.getByID(id);
             if (location)
                 res.send(location);
             else
@@ -26,7 +24,7 @@ export class LocationController {
     async getAll(req: any, res: any) {
 
         try {
-            let locations: LocationRM[] = await this.locationRepository.getAll();
+            let locations: LocationM[] = await this.locationRepository.getAll();
             res.send(locations);
         }
         catch (error) {
@@ -39,7 +37,7 @@ export class LocationController {
 
         try {
             let id: any = req.body.locationID;
-            let employees: EmployeeRM[] = await this.locationRepository.getEmployees(id);
+            let employees: EmployeeM[] = await this.locationRepository.getEmployees(id);
             res.send(employees);
         }
         catch (error) {

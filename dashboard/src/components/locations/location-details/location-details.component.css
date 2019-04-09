@@ -14,7 +14,8 @@
 }
 
 .details-row {
-  flex: 1;
+  display: flex;
+  align-items: center;
 }
 
 button, .details-row * {

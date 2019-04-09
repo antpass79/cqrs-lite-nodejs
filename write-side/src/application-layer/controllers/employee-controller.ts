@@ -1,9 +1,8 @@
 import { ICommandSender } from "cqrs-lite";
+import { ILocationRepository, IEmployeeRepository } from "cqrs-lite-common";
 import { CreateEmployeeRequest, CreateEmployeeRequestValidator } from "../../dtos/create-employee-request";
-import { ILocationRepository } from "../../domain-layer/write-model/repositories/location-repository";
 import { AutoMapper } from "automapper-ts-node";
 import { EmployeeService } from "../services/employee.service";
-import { IEmployeeRepository } from "../../domain-layer/write-model/repositories/employee-repository";
 
 export class EmployeeController {
 

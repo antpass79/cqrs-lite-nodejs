@@ -1,11 +1,9 @@
 import { ICommandSender } from "cqrs-lite";
 import { AssignEmployeeToLocationCommand } from "../../domain-layer/commands/assign-employee-to-location-command";
-import { CreateLocationCommand } from "../../domain-layer/commands/create-location-command";
 import { CreateLocationRequest, CreateLocationRequestValidator } from "../../dtos/create-location-request";
 import { AssignEmployeeToLocationRequest, AssignEmployeeToLocationRequestValidator } from "../../dtos/assign-employee-to-location-request";
 import { RemoveEmployeeFromLocationCommand } from "../../domain-layer/commands/remove-employee-from-location-command";
-import { ILocationRepository } from "../../domain-layer/write-model/repositories/location-repository";
-import { IEmployeeRepository } from "../../domain-layer/write-model/repositories/employee-repository";
+import { ILocationRepository, IEmployeeRepository } from "cqrs-lite-common";
 import { AutoMapper } from "automapper-ts-node";
 import { LocationService } from "../services/location.service";
 
