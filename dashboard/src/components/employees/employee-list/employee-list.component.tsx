@@ -4,6 +4,9 @@ import "react-table/react-table.css";
 
 import './employee-list.component.css';
 import { Employee } from '../../../models/employee';
+import { Fab } from '@material-ui/core';
+import DeleteIcon from '@material-ui/icons/Delete';
+import EditIcon from '@material-ui/icons/Edit';
 
 type props = {
     onChangeEmployee?: any,
@@ -22,19 +25,10 @@ export class EmployeeList extends React.Component<props> {
 
     onModifyEmployee = (employee: Employee) => () => {
         alert('TODO');
-        // let updatedEmployee: Employee = {
-        //     firstName: employee.firstName,
-        //     lastName: employee.lastName,
-        //     jobTitle: employee.jobTitle,
-        //     dateOfBirth
-        // };
-
-        // this.props.onChangeEmployee(updatedEmployee);
     }
 
     onRemoveEmployee = (employee: Employee) => () => {
         alert('TODO');
-        // this.props.onRemoveEmployee(employee);
     }
 
     render() {
@@ -62,11 +56,19 @@ export class EmployeeList extends React.Component<props> {
             },
             {
                 Header: '',
-                Cell: (props: any) => <button onClick={this.onModifyEmployee(props.original)}>Modify</button>
+                Cell: (props: any) => (
+                    <Fab color="primary" aria-label="Add" onClick={this.onModifyEmployee(props.original)}>
+                        <EditIcon />
+                    </Fab>
+                )
             },
             {
                 Header: '',
-                Cell: (props: any) => <button onClick={this.onRemoveEmployee(props.original)}>Remove</button>
+                Cell: (props: any) => (
+                    <Fab color="primary" aria-label="Add" onClick={this.onRemoveEmployee(props.original)}>
+                        <DeleteIcon />
+                    </Fab>
+                )
             }
         ]
         const data = this.props.employees;        

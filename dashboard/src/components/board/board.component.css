@@ -15,14 +15,19 @@
   flex: 1;
 }
 
-.init {
-  align-self: flex-start;
-}
-
 .main-options {
   display: flex;
   flex-direction: column;
   margin: 10px;
+}
+
+.init {
+}
+
+.main-routes {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 .main-content {

@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react';
 
+import '../styles.css';
 import './board.component.css';
 import { Employees } from '../employees/employees.component';
 import { EmployeeDetails } from '../employees/employee-details/employee-details.component';
@@ -8,6 +9,7 @@ import { History, createBrowserHistory } from 'history';
 import { InitializerService } from '../../services/initializer.service';
 import { Locations } from '../locations/locations.component';
 import { LocationDetails } from '../locations/location-details/location-details.component';
+import { Button, Tooltip } from '@material-ui/core';
 
 type state = {
   history: History<any>
@@ -39,24 +41,29 @@ export class Board extends React.Component<props, state> {
   }
 
   render() {
-
     return (
       <div className="board">
-        <button className="init" onClick={this.onInit}>Initialize System with some data (not mandatory)</button>
         <div className="board-row row-up">
           <BrowserRouter>
             <div className="main-options">
-              <NavLink className="link" to='/employees' activeClassName="is-active">Employees</NavLink>
-              <NavLink className="link" to='/locations' activeClassName="is-active">Locations</NavLink>
+              <div className="init">
+                <Tooltip title="Initialize the System with some data (not mandatory)">
+                  <Button className="button-ui" variant="contained" color="primary" onClick={this.onInit}>Initialize</Button>
+                </Tooltip>
+              </div>
+              <div className="main-routes">
+                <NavLink className="link" to='/locations' activeClassName="is-active">Locations</NavLink>
+                <NavLink className="link" to='/employees' activeClassName="is-active">Employees</NavLink>
+              </div>
             </div>
             <Switch>
               <Fragment>
-              <div className="main-content">
-                <Route exact path="/employees" component={Employees} history={this.state.history} />
-                <Route exact path="/employees/details" component={EmployeeDetails} history={this.state.history} />
-                <Route exact path="/locations" component={Locations} history={this.state.history} />
-                <Route exact path="/locations/details" component={LocationDetails} history={this.state.history} />
-              </div>
+                <div className="main-content">
+                  <Route exact path="/locations" component={Locations} history={this.state.history} />
+                  <Route exact path="/locations/details" component={LocationDetails} history={this.state.history} />
+                  <Route exact path="/employees" component={Employees} history={this.state.history} />
+                  <Route exact path="/employees/details" component={EmployeeDetails} history={this.state.history} />
+                </div>
               </Fragment>
             </Switch>
           </BrowserRouter>

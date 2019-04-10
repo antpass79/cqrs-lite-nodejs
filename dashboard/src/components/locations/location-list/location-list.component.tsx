@@ -4,6 +4,9 @@ import "react-table/react-table.css";
 
 import './location-list.component.css';
 import { Location } from '../../../models/location';
+import { Fab } from '@material-ui/core';
+import DeleteIcon from '@material-ui/icons/Delete';
+import EditIcon from '@material-ui/icons/Edit';
 
 type props = {
     onChangeLocation?: any,
@@ -22,20 +25,10 @@ export class LocationList extends React.Component<props> {
 
     onModifyLocation = (location: Location) => () => {
         alert('TODO');
-        // let updatedLocation: Location = {
-        //     locationID: location.locationID,
-        //     city: location.city,
-        //     streetAddress: location.streetAddress,
-        //     state: location.state,
-        //     postalCode: location.postalCode,
-        // };
-
-        // this.props.onChangeLocation(updatedLocation);
     }
 
     onRemoveLocation = (location: Location) => () => {
         alert('TODO');
-        // this.props.onRemoveLocation(location);
     }
 
     render() {
@@ -67,12 +60,25 @@ export class LocationList extends React.Component<props> {
                 Cell: (props: any) => <span>{props.value}</span>
             },
             {
-                Header: '',
-                Cell: (props: any) => <button onClick={this.onModifyLocation(props.original)}>Modify</button>
+                Header: 'Location ID',
+                accessor: 'locationID',
+                Cell: (props: any) => <span>{props.value}</span>
             },
             {
                 Header: '',
-                Cell: (props: any) => <button onClick={this.onRemoveLocation(props.original)}>Remove</button>
+                Cell: (props: any) => (
+                    <Fab color="primary" aria-label="Add" onClick={this.onModifyLocation(props.original)}>
+                        <EditIcon />
+                    </Fab>
+                )
+            },
+            {
+                Header: '',
+                Cell: (props: any) => (
+                    <Fab color="primary" aria-label="Add" onClick={this.onRemoveLocation(props.original)}>
+                        <DeleteIcon />
+                    </Fab>
+                )
             }
         ]
         const data = this.props.locations;

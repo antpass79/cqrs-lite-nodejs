@@ -28,6 +28,7 @@ The following picture shows the flow of the data through main components
 
 In order to run the system you need to follow these steps:
 
+- install and run redis
 - download or clone the repository
 - go under the folder write-side and type:
 
@@ -49,6 +50,41 @@ In order to run the system you need to follow these steps:
 
         npm install
         npm start
+
+### Using the System
+
+Open the web application at the url:
+
+    http://localhost:3000/employees
+
+The program appears in this way:
+![employees](assets/images/employees.jpg)
+
+The same grid with different data will be shown at the following url:
+
+    http://localhost:3000/locations
+
+There will be an error from server without initializing the system after every call to get a list.
+
+So it's better to initialize the system with fake data created on the server and pushed on redis.
+After clicking the Initialize button you can refresh the current list with the Refresh button.
+
+For the locations list you'll have:
+![fill locations](assets/images/fill-locations.jpg)
+
+If you want to add a new location, press the Create button above the list:
+![create location](assets/images/create-location.jpg)
+Click Save button.
+NOTE: the Location ID must be unique (check on the location list)
+
+The same for adding a new Employee:
+![create employee](assets/images/create-employee.jpg)
+
+If you want to delete ALL (pay attention with this command) data on redis, you have to run the following command:
+
+    redis-cli FLUSHALL
+
+Modify and Delete actions are not implemented.
 
 ## References
 
