@@ -1,0 +1,27 @@
+.form-root {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  padding: 50px;
+  padding-left: 40%;
+  padding-right: 40%;
+  align-items: center;
+}
+
+.form-control {
+  width: 100%;
+  margin: 15px !important;
+}
+
+.button-ui, .textfield-ui, .select-ui, .picker-ui {
+    flex: 1;
+    margin: 5px !important;
+  }
+
+  .button-ui {
+    align-self: flex-end;
+  }
+
+  .picker-ui > div {
+    width: 100%;
+  }

@@ -1,34 +1,40 @@
-import React, { RefObject } from 'react';
+import React from 'react';
+import { FormControl } from '@material-ui/core';
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
+import '../../styles.css';
+
 import { History } from 'history';
 
-import './location-details.component.css';
 import { LocationService } from '../../../services/location.service';
 import { Location } from '../../../models/location';
 
+type state = {
+  city: string,
+  streetAddress: string,
+  state: string,
+  postalCode: string,
+  locationID?: any
+};
 type props = {
   history: History<any>,
   onClick?: any
 };
-export class LocationDetails extends React.Component<props> {
+export class LocationDetails extends React.Component<props, state> {
 
   locationService: LocationService;
-
-  cityInput: RefObject<HTMLInputElement>;
-  streetAddressInput: RefObject<HTMLInputElement>;
-  stateInput: RefObject<HTMLInputElement>;
-  postalCodeInput: RefObject<HTMLInputElement>;
-  locationIDInput: RefObject<HTMLInputElement>;
 
   constructor(props: Readonly<props>) {
     super(props);
 
     this.locationService = new LocationService();
 
-    this.cityInput = React.createRef();
-    this.streetAddressInput = React.createRef();
-    this.stateInput = React.createRef();
-    this.postalCodeInput = React.createRef();
-    this.locationIDInput = React.createRef();
+    this.state = {
+      city: '',
+      streetAddress: '',
+      state: '',
+      postalCode: ''
+    };
   }
 
   onBack = () => {
@@ -38,11 +44,11 @@ export class LocationDetails extends React.Component<props> {
   onSave = () => {
 
     let location: Location = {
-      city: this.cityInput.current.value,
-      streetAddress: this.streetAddressInput.current.value,
-      state: this.stateInput.current.value,
-      postalCode: this.postalCodeInput.current.value,
-      locationID: this.locationIDInput.current.value
+      city: this.state.city,
+      streetAddress: this.state.streetAddress,
+      state: this.state.state,
+      postalCode: this.state.postalCode,
+      locationID: this.state.locationID
     };
 
     this.locationService.create(location).then((response: Response) => {
@@ -55,32 +61,60 @@ export class LocationDetails extends React.Component<props> {
 
   render() {
     return (
-      <div className="location-details">
-        <div className="location-aligner">
-          <div className="details-row">
-            <label>City</label>
-            <input type="text" ref={this.cityInput}></input>
-          </div>
-          <div className="details-row">
-            <label>Street Address</label>
-            <input type="text" ref={this.streetAddressInput}></input>
-          </div>
-          <div className="details-row">
-            <label>State</label>
-            <input type="text" ref={this.stateInput}></input>
-          </div>
-          <div className="details-row">
-            <label>Postal Code</label>
-            <input type="text" ref={this.postalCodeInput}></input>
-          </div>
-          <div className="details-row">
-            <label>Location ID</label>
-            <input type="text" ref={this.locationIDInput}></input>
-          </div>
-          <button onClick={this.onSave}>Save</button>
-          <button onClick={this.onBack}>Back</button>
-        </div>
-      </div>
+      <form className="form-root">
+        <FormControl className="form-control">
+          <TextField
+            id="city"
+            label="city"
+            className="textfield-ui"
+            value={this.state.city}
+            onChange={e => this.setState({ city: e.target.value })}
+            margin="normal"
+          />
+        </FormControl>
+        <FormControl className="form-control">
+          <TextField
+            id="street-address"
+            label="Street Address"
+            className="textfield-ui"
+            value={this.state.streetAddress}
+            onChange={e => this.setState({ streetAddress: e.target.value })}
+            margin="normal"
+          />
+        </FormControl>
+        <FormControl className="form-control">
+          <TextField
+            id="state"
+            label="State"
+            className="textfield-ui"
+            value={this.state.state}
+            onChange={e => this.setState({ state: e.target.value })}
+            margin="normal"
+          />
+        </FormControl>
+        <FormControl className="form-control">
+          <TextField
+            id="postal-code"
+            label="Postal Code"
+            className="textfield-ui"
+            value={this.state.postalCode}
+            onChange={e => this.setState({ postalCode: e.target.value })}
+            margin="normal"
+          />
+        </FormControl>
+        <FormControl className="form-control">
+          <TextField
+            id="location-id"
+            label="Location ID"
+            className="textfield-ui"
+            value={this.state.locationID}
+            onChange={e => this.setState({ locationID: e.target.value })}
+            margin="normal"
+          />
+        </FormControl>
+        <Button className="button-ui" variant="contained" color="primary" onClick={this.onSave}>Save</Button>
+        <Button className="button-ui" variant="contained" color="primary" onClick={this.onBack}>Back</Button>
+      </form>
     );
   }
 }

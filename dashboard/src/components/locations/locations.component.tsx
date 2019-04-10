@@ -6,6 +6,7 @@ import './locations.component.css';
 import { Location } from '../../models/location';
 import { LocationService } from '../../services/location.service';
 import { SocketClientService } from '../../services/socket-client.service';
+import { Button } from '@material-ui/core';
 
 type state = {
     locations: Location[],
@@ -69,43 +70,30 @@ export class Locations extends React.Component<props, state> {
             });
     }
 
+    updateLocations = (locations: Location[]) => {
+        this.setState((state) => {
+            return {
+                locations
+            };
+        });
+    }
+
     onRefresh = () => {
         this.setBusy(true);
 
         this._locationService.getAll().then((data) => {
             return data.json()
                 .then((locations: Location[]) => {
-                    this.setState(state => {
-                        return {
-                            locations
-                        };
-                    });
+                    this.updateLocations(locations);
                 })
-                .catch((error) => {
-                    console.log(error);
-                    this.setState(state => {
-                        const locations: Location[] = [];
-                        return {
-                            locations
-                        };
-                    });
+                .catch((error) => {                    
+                    this.updateLocations([]);
+                    alert('Error during locations request');
                 })
                 .finally(() => {
                     this.setBusy(false);
                 });
-        })
-            .catch((error) => {
-                console.log(error);
-                this.setState(state => {
-                    const locations: Location[] = [];
-                    return {
-                        locations
-                    };
-                });
-            })
-            .finally(() => {
-                this.setBusy(false);
-            });
+        });
     }
 
     onCreate = () => {
@@ -117,20 +105,14 @@ export class Locations extends React.Component<props, state> {
     }
 
     render() {
-        if (!this.state.loading) {
-            return (
-                <div className="locations">
-                    <div className="options">
-                        <button onClick={this.onRefresh}>Refresh</button>
-                        <button onClick={this.onCreate}>Create</button>
-                    </div>
-                    {this.renderLocationList()}
-                </div>
-            );
-        }
-
         return (
-            <img className="spinner" src="/assets/images/loading.gif" />
+            <div className="locations">
+                <div className="options">
+                    <Button className="button-ui" variant="contained" color="primary" onClick={this.onRefresh}>Refresh</Button>
+                    <Button className="button-ui" variant="contained" color="primary" onClick={this.onCreate}>Create</Button>
+                </div>
+                {this.state.loading ? <img className="spinner" src="/assets/images/loading.gif" /> : this.renderLocationList()}
+            </div>
         );
     }
 }

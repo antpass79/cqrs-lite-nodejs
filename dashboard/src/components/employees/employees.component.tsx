@@ -5,7 +5,7 @@ import { EmployeeList } from './employee-list/employee-list.component';
 import './employees.component.css';
 import { Employee } from '../../models/employee';
 import { EmployeeService } from '../../services/employee.service';
-import { SocketClientService } from '../../services/socket-client.service';
+import { Button } from '@material-ui/core';
 
 type state = {
     employees: Employee[],
@@ -28,21 +28,7 @@ export class Employees extends React.Component<props, state> {
     }
 
     componentDidMount() {
-
         this.onRefresh();
-
-        // let socketClientService = new SocketClientService('http://localhost:4005');
-        // socketClientService.on('employeeAdded', (employee: Employee) => {
-        //     console.log('Employee from socket:');
-        //     console.log(employee);
-
-        //     this.setState(state => {
-        //         const employees = [...state.employees, employee];
-        //         return {
-        //             employees
-        //         };
-        //     });
-        // });
     }
 
     setBusy = (busy: boolean) => {
@@ -69,43 +55,30 @@ export class Employees extends React.Component<props, state> {
             });
     }
 
+    updateEmployees = (employees: Employee[]) => {
+        this.setState((state) => {
+            return {
+                employees
+            };
+        });
+    }
+
     onRefresh = () => {
         this.setBusy(true);
 
         this._employeeService.getAll().then((data) => {
             return data.json()
                 .then((employees: Employee[]) => {
-                    this.setState(state => {
-                        return {
-                            employees
-                        };
-                    });
+                    this.updateEmployees(employees);
                 })
                 .catch((error) => {
-                    console.log(error);
-                    this.setState(state => {
-                        const employees: Employee[] = [];
-                        return {
-                            employees
-                        };
-                    });
+                    this.updateEmployees([]);
+                    alert('Error during locations request');
                 })
                 .finally(() => {
                     this.setBusy(false);
                 });
-        })
-            .catch((error) => {
-                console.log(error);
-                this.setState(state => {
-                    const employees: Employee[] = [];
-                    return {
-                        employees
-                    };
-                });
-            })
-            .finally(() => {
-                this.setBusy(false);
-            });
+        });
     }
 
     onCreate = () => {
@@ -117,20 +90,15 @@ export class Employees extends React.Component<props, state> {
     }
 
     render() {
-        if (!this.state.loading) {
-            return (
-                <div className="employees">
-                    <div className="options">
-                        <button onClick={this.onRefresh}>Refresh</button>
-                        <button onClick={this.onCreate}>Create</button>
-                    </div>
-                    {this.renderEmployeeList()}
-                </div>
-            );
-        }
-
         return (
-            <img className="spinner" src="/assets/images/loading.gif" />
+            <div className="employees">
+                <div className="options">
+                    <Button className="button-ui" variant="contained" color="primary" onClick={this.onRefresh}>Refresh</Button>
+                    <Button className="button-ui" variant="contained" color="primary" onClick={this.onCreate}>Create</Button>
+                </div>
+                {this.state.loading ? <img className="spinner" src="/assets/images/loading.gif" /> : this.renderEmployeeList()}
+            </div>
         );
     }
 }
+

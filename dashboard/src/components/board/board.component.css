@@ -6,7 +6,7 @@
 }
 
 .board-row {
-  flex-direction: column;
+  flex-direction: row;
   flex: 1;
 }
 
@@ -19,11 +19,25 @@
   align-self: flex-start;
 }
 
-.options {
+.main-options {
   display: flex;
   flex-direction: column;
+  margin: 10px;
+}
+
+.main-content {
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  margin: 10px;
 }
 
 .link {
   margin: 5px;
+}
+
+.is-active {
+  font-style: italic;
+  font-weight: bold;
+  color: blue;
 }
