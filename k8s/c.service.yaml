@@ -1,0 +1,13 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: cqrs-lite-nodejs
+spec:
+  selector:
+    app: cqrs-lite-nodejs
+  ports:
+  - protocol: TCP
+    port: 80
+    nodePort: 30036
+    targetPort: 80
+  type: NodePort

@@ -1,0 +1,44 @@
+---
+ apiVersion: v1
+ kind: Pod
+ metadata:
+   name: cqrs-lite-nodejs
+   labels:
+     app: cqrs-lite-nodejs
+ spec:
+   containers:
+     - name: dashboard
+       image: dashboard:v1
+       ports:
+         - containerPort: 80
+---
+ apiVersion: extensions/v1beta1
+ kind: Deployment
+ metadata:
+   name: cqrs-lite-nodejs
+ spec:
+   replicas: 3
+   template:
+     metadata:
+       labels:
+         app: cqrs-lite-nodejs
+     spec:
+       containers:
+         - name: dashboard
+           image: dashboard:v1
+           ports:
+             - containerPort: 80
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: cqrs-lite-nodejs
+spec:
+  selector:
+    app: cqrs-lite-nodejs
+  ports:
+  - protocol: TCP
+    port: 80
+    nodePort: 30036
+    targetPort: 80
+  type: NodePort

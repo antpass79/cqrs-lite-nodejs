@@ -1,0 +1,21 @@
+---
+ apiVersion: v1
+ kind: Pod
+ metadata:
+   name: cqrs-lite-nodejs
+   labels:
+     app: cqrs-lite-nodejs
+ spec:
+   containers:
+     - name: dashboard
+       image: dashboard:v1
+       ports:
+         - containerPort: 80
+     - name: write-side
+       image: write-side:v1
+       ports:
+         - containerPort: 80
+     - name: read-side
+       image: read-side:v1
+       ports:
+         - containerPort: 80

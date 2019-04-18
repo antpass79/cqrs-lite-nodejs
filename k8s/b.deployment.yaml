@@ -1,0 +1,25 @@
+---
+ apiVersion: extensions/v1beta1
+ kind: Deployment
+ metadata:
+   name: cqrs-lite-nodejs
+ spec:
+   replicas: 3
+   template:
+     metadata:
+       labels:
+         app: cqrs-lite-nodejs
+     spec:
+       containers:
+         - name: dashboard
+           image: dashboard:v1
+           ports:
+             - containerPort: 80
+         - name: write-side
+           image: write-side:v1
+           ports:
+             - containerPort: 80
+         - name: read-side
+           image: read-side:v1
+           ports:
+             - containerPort: 80
