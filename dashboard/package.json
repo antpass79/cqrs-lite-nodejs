@@ -17,7 +17,7 @@
     "konva": "^3.1.6",
     "material-ui-icons": "^1.0.0-beta.36",
     "material-ui-next-pickers": "0.0.20",
-    "node-sass": "^4.11.0",
+    "node-sass": "^7.0.0",
     "react": "^16.8.3",
     "react-datepicker": "^2.3.0",
     "react-dom": "^16.8.3",
